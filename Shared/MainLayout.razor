@@ -1,17 +1,50 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <div class="main">
-        <div class="top-row px-4 auth">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <div class="content px-4">
+        <ul class="container">
+            <li class="flex-item">
+                <a href="/" class="link-button">Home</a>
+            </li>
+            <li class="flex-item">
+                <a href="/counter" class="link-button">Counter</a>
+            </li>
+            <li class="flex-item">
+                <a href="/fetchdata" class="link-button">Fetch</a>
+            </li>
+            <li class="flex-item">
+                <AuthorizeView>
+                    <Authorized>
+                        <a class="link-button" href="Identity/Account/Manage">Profile</a>
+                        @* @context.User.Identity.Name *@
+                    </Authorized>
+                </AuthorizeView>
+            </li>
+            <li class="flex-item">
+                <AuthorizeView>
+                    <Authorized>
+                        <form method="post" action="Identity/Account/LogOut">
+                            <button class="link-button logout-button" type="submit">Log out</button>
+                        </form>
+                    </Authorized>
+                </AuthorizeView>
+            </li>
+            <li class="flex-item">
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <a class="link-button" href="Identity/Account/Register">Register</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </li>
+            <li class="flex-item">
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <a class="link-button" href="Identity/Account/Login">Log in</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </li>
+        </ul>
+        <div>
             @Body
         </div>
     </div>
